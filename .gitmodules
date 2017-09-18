@@ -1,3 +1,0 @@
-[submodule "vendor/ucc"]
-	path = vendor/ucc
-	url = https://github.com/uael/ucc.git
