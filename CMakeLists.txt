@@ -15,7 +15,7 @@ if (NOT COMMAND project_dependency)
       "ExternalProject_Add(vendor-${DEP}\n"
       "${DL_ARGS_UNPARSED_ARGUMENTS}\nSOURCE_DIR \"${DL_ARGS_SOURCE_DIR}\"\n"
       "CONFIGURE_COMMAND \"\"\nBUILD_COMMAND \"\"\nINSTALL_COMMAND \"\"\nTEST_COMMAND \"\"\n"
-      "UPDATE_COMMAND \"\"PATCH_COMMAND \"\")")
+      "UPDATE_COMMAND \"\"\nPATCH_COMMAND \"\")")
     execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}"
       -D "CMAKE_MAKE_PROGRAM:FILE=${CMAKE_MAKE_PROGRAM}" .
       RESULT_VARIABLE result OUTPUT_QUIET
