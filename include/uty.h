@@ -84,6 +84,7 @@ typedef bool bool_t;
 #define f32eq(a, b) ((bool_t)((f32_t)(a) == (f32_t)(b)))
 #define f64eq(a, b) ((bool_t)((f64_t)(a) == (f64_t)(b)))
 #define streq(a, b) ((bool_t)(strcmp(a, b) == 0))
+#define addreq(a, b) ((bool_t)(&(a) == &(b)))
 
 #define i8cmp(a, b) ((i8_t)(((a) > (b)) - ((a) < (b))))
 #define u8cmp(a, b) ((i8_t)(((a) > (b)) - ((a) < (b))))
@@ -95,5 +96,6 @@ typedef bool bool_t;
 #define u64cmp(a, b) ((i8_t)(((a) > (b)) - ((a) < (b))))
 #define f32cmp(a, b) ((i8_t)(((a) > (b)) - ((a) < (b))))
 #define f64cmp(a, b) ((i8_t)(((a) > (b)) - ((a) < (b))))
+#define addrcmp(a, b) ((i8_t)((&(a) > &(b)) - (&(a) < &(b))))
 
 #endif /* !__UTY_H */
