@@ -40,10 +40,25 @@ typedef short i16_t;
 typedef unsigned short u16_t;
 typedef int i32_t;
 typedef unsigned int u32_t;
+
+#if CPU_64
+typedef long i64_t;
+typedef unsigned long u64_t;
+#else
 typedef long long i64_t;
 typedef unsigned long long u64_t;
+#endif
+
 typedef float f32_t;
 typedef double f64_t;
+
+#if defined OS_WIN && CPU_64
+typedef i64_t isize_t;
+typedef u64_t usize_t;
+#else
+typedef long isize_t;
+typedef unsigned long usize_t;
+#endif
 
 #ifndef __cplusplus
 # if defined CC_MSVC && CC_MSVC < 1900
