@@ -29,46 +29,45 @@
 #ifndef __UTY_H
 # define __UTY_H
 
-#include <string.h>
 #include <ucc.h>
 
-#define nil ((void *) 0)
-
-typedef char i8_t;
-typedef unsigned char u8_t;
-typedef short i16_t;
-typedef unsigned short u16_t;
-typedef int i32_t;
-typedef unsigned int u32_t;
-
-#if CPU_64
-typedef long i64_t;
-typedef unsigned long u64_t;
+#ifdef NULL
+# define nil NULL
 #else
-typedef long long i64_t;
-typedef unsigned long long u64_t;
+# define nil ((void *) 0)
 #endif
+
+typedef char char_t;
+
+typedef int8_t i8_t;
+typedef int16_t i16_t;
+typedef int32_t i32_t;
+typedef int64_t i64_t;
+typedef uint8_t u8_t;
+typedef uint16_t u16_t;
+typedef uint32_t u32_t;
+typedef uint64_t u64_t;
 
 typedef float f32_t;
 typedef double f64_t;
 
-#if defined OS_WIN && CPU_64
+#if defined OS_WIN
+# if CPU_64
 typedef i64_t isize_t;
-typedef u64_t usize_t;
+# else
+typedef i32_t isize_t;
+# endif
+typedef size_t usize_t;
 #else
-typedef long isize_t;
-typedef unsigned long usize_t;
+typedef ssize_t isize_t;
+typedef size_t usize_t;
 #endif
 
-#ifndef __cplusplus
-# if defined CC_MSVC && CC_MSVC < 1900
-#   define bool unsigned char
-#   define true 1
-#   define false 0
-#   define __bool_true_false_are_defined 1
-# else
-#   include <stdbool.h>
-# endif
+#if !defined __cplusplus && !defined __bool_true_false_are_defined
+# define bool unsigned char
+# define true 1
+# define false 0
+# define __bool_true_false_are_defined 1
 #endif
 
 typedef bool bool_t;

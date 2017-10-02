@@ -26,6 +26,21 @@ add_library(uty INTERFACE)
 target_include_directories(uty INTERFACE ${uty_INC_DIR})
 target_link_libraries(uty INTERFACE ucc)
 
+set(CMAKE_C_FLAGS "")
+set(CMAKE_C_FLAGS_DEBUG "")
+set(CMAKE_C_FLAGS_RELEASE "")
+
+if (MSVC)
+  target_compile_options(uty
+    INTERFACE /MT$<$<CONFIG:Debug>:d> /Oy /Za
+    INTERFACE /O$<$<CONFIG:Debug>:d>$<$<CONFIG:Release>:x>)
+else ()
+  target_compile_options(uty
+    INTERFACE -Wall -Werror -Wextra -fomit-frame-pointer
+    INTERFACE -Wno-missing-field-initializers
+    INTERFACE -O$<$<CONFIG:Debug>:0 -g3>$<$<CONFIG:Release>:3>)
+endif ()
+
 get_directory_property(uty_PARENT PARENT_DIRECTORY)
 if (NOT ${uty_PARENT})
   set(uty_DEVEL TRUE)
