@@ -32,7 +32,8 @@ set(CMAKE_C_FLAGS_RELEASE "")
 
 if (MSVC)
   target_compile_options(uty
-    INTERFACE /MT$<$<CONFIG:Debug>:d> /Oy /Za
+    INTERFACE /MT$<$<CONFIG:Debug>:d> /Oy /Za /W3
+    INTERFACE /D_CRT_SECURE_NO_WARNINGS
     INTERFACE /O$<$<CONFIG:Debug>:d>$<$<CONFIG:Release>:x>)
 else ()
   target_compile_options(uty
@@ -42,12 +43,12 @@ else ()
 endif ()
 
 get_directory_property(uty_PARENT PARENT_DIRECTORY)
-if (NOT ${uty_PARENT})
+if (NOT uty_PARENT)
   set(uty_DEVEL TRUE)
-elseif (NOT ${uty_DEVEL})
+elseif (NOT uty_DEVEL)
   set(uty_DEVEL FALSE)
 endif ()
-if (${uty_DEVEL} AND EXISTS ${uty_TEST_DIR})
+if (uty_DEVEL AND EXISTS ${uty_TEST_DIR})
   if (NOT uty_PARENT)
     enable_testing()
   endif ()
@@ -55,10 +56,10 @@ if (${uty_DEVEL} AND EXISTS ${uty_TEST_DIR})
   file(GLOB uty_TEST_SRCS ${uty_TEST_SRCS} ${uty_TEST_DIR}/*.c)
   foreach (uty_TEST_SRC ${uty_TEST_SRCS})
     get_filename_component(uty_TEST_NAME ${uty_TEST_SRC} NAME_WE)
-    add_executable(test_${uty_TEST_NAME} ${uty_TEST_SRC})
-    add_dependencies(test_${uty_TEST_NAME} uty)
-    target_link_libraries(test_${uty_TEST_NAME} uty)
-    add_test(${uty_TEST_NAME} test_${uty_TEST_NAME})
+    add_executable(test_uty_${uty_TEST_NAME} ${uty_TEST_SRC})
+    add_dependencies(test_uty_${uty_TEST_NAME} uty)
+    target_link_libraries(test_uty_${uty_TEST_NAME} uty)
+    add_test(${uty_TEST_NAME} test_uty_${uty_TEST_NAME})
   endforeach ()
 endif ()
 

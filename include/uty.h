@@ -57,7 +57,7 @@ typedef i64_t isize_t;
 # else
 typedef i32_t isize_t;
 # endif
-typedef size_t usize_t;
+typedef uintmax_t usize_t;
 #else
 typedef ssize_t isize_t;
 typedef size_t usize_t;
